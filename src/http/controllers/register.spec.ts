@@ -10,14 +10,14 @@ describe('Register (e2e)', () => {
   afterAll(async () => {
     await app.close()
   })
-})
 
-it('should be able to register', async () => {
-  const response = await request(app.server).post('/users').send({
-    name: 'john doe',
-    email: 'johndoe@example.com',
-    password: '123456',
+  it('should be able to register', async () => {
+    const response = await request(app.server).post('/users').send({
+      name: 'john doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+    })
+
+    expect(response.statusCode).toEqual(201)
   })
-
-  expect(response.statusCode).toEqual(201)
 })
