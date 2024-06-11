@@ -1,22 +1,22 @@
 import { CheckIn } from '@prisma/client'
 import { CheckInsRepository } from '@/repositories/check-ins-repository'
 import { GymsRepository } from '@/repositories/gyms-repository'
-import { getDistanceBetweenCoordinates } from './utils/get-distance-between-coordinates'
+import { getDistanceBetweenCoordinates } from '../utils/get-distance-between-coordinates'
 import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins'
 import { MaxDistanceError } from './errors/max-distance-error'
 
-interface CheckinUseCaseRequest {
+interface CheckInUseCaseRequest {
   userId: string
   gymId: string
   userLatitude: number
   userLongitude: number
 }
 
-interface CheckinUseCaseResponse {
+interface CheckInUseCaseResponse {
   checkIn: CheckIn
 }
 
-export class CheckinUseCase {
+export class CheckInUseCase {
   constructor(
     private checkInsRepository: CheckInsRepository,
     private gymsRepository: GymsRepository,
@@ -27,7 +27,7 @@ export class CheckinUseCase {
     gymId,
     userLatitude,
     userLongitude,
-  }: CheckinUseCaseRequest): Promise<CheckinUseCaseResponse> {
+  }: CheckInUseCaseRequest): Promise<CheckInUseCaseResponse> {
     const gym = await this.gymsRepository.findById(gymId)
 
     if (!gym) {

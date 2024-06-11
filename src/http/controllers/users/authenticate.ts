@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { PrismaUsersRepository } from '../../repositories/prisma/prisma-users-repository'
-import { UserAlreadyExistsError } from '../../use-cases/errors/user-already-exists-error'
+import { PrismaUsersRepository } from '../../../repositories/prisma/prisma-users-repository'
+import { UserAlreadyExistsError } from '../../../use-cases/errors/user-already-exists-error'
 import { AuthenticateUseCase } from '@/use-cases/authenticate'
 
 // CONTROLLER: lida com a parte de receber a requisicao e devolver uma resposta, geralmente esta associado a framework

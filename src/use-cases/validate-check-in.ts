@@ -1,23 +1,23 @@
-import { CheckIn } from '@prisma/client'
 import { CheckInsRepository } from '@/repositories/check-ins-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
+import { CheckIn } from '@prisma/client'
 import dayjs from 'dayjs'
 import { LateCheckInValidationError } from './errors/create-check-in-validation-error'
 
-interface ValidateCheckinUseCaseRequest {
+interface ValidateCheckInUseCaseRequest {
   checkInId: string
 }
 
-interface ValidateCheckinUseCaseResponse {
+interface ValidateCheckInUseCaseResponse {
   checkIn: CheckIn
 }
 
-export class ValidateCheckinUseCase {
+export class ValidateCheckInUseCase {
   constructor(private checkInsRepository: CheckInsRepository) {}
 
   async execute({
     checkInId,
-  }: ValidateCheckinUseCaseRequest): Promise<ValidateCheckinUseCaseResponse> {
+  }: ValidateCheckInUseCaseRequest): Promise<ValidateCheckInUseCaseResponse> {
     const checkIn = await this.checkInsRepository.findById(checkInId)
 
     if (!checkIn) {
@@ -37,6 +37,8 @@ export class ValidateCheckinUseCase {
 
     await this.checkInsRepository.save(checkIn)
 
-    return { checkIn }
+    return {
+      checkIn,
+    }
   }
 }

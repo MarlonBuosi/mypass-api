@@ -28,10 +28,7 @@ export class PrismaGymsRepository implements GymsRepository {
   }
 
   async create(data: Prisma.GymCreateInput) {
-    const gym = await prisma.gym.update({
-      where: {
-        id: data.id,
-      },
+    const gym = await prisma.gym.create({
       data,
     })
 
