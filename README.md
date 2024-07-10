@@ -1,6 +1,113 @@
 # App
 
-GymPass style app.
+Mypass: GymPass style app.
+
+This API is made following SOLID principles, it has both Unit testing and E2E testing.
+
+Endpoints Documentation:
+
+Users Controller:
+ - Register:
+    Context:  Register an user on the database
+    Method: POST
+    URL: /register
+    JSON Payload: {
+      "email": "test@test.com",
+      "name": "test",
+      "password": "test"
+    }
+  
+  - Profile:
+    Context: Get a profile for a registered and authenticated user
+    Method: GET
+    URL: /me
+    JSON Payload: None
+  
+  - Authenticate:
+      Context: Authenticate an registered user
+      Method: POST
+      URL: /sessions
+      JSON Payload: {
+        "email": "test@test.com",
+        "password": "123456"
+      }
+
+  - Refresh:
+      Context: Refresh a Token
+      Method: PATCH
+      URL: /token/refresh
+      JSON Payload: None
+
+Gyms Controller:
+  - Create:
+      Context: Register a gym
+      Method: POST
+      URL: /gyms
+      JSON Payload: {
+        "title": "string",
+        "description": "string",
+        "phone": "string",
+        "latitude": number,
+        "longitude": number
+      }
+
+  - Nearby:
+      Context: Return a gym nearby the coordinates
+      Method: GET
+      URL: /gyms/nearby
+      JSON Payload: {
+        "latitude": number,
+        "longitude": number,
+      }
+
+  - Search:
+      Context: Search gym by text, returns a pagination
+      Method: GET
+      URL: /gyms/search
+      Query Parameter: q (query) as string, page as number
+
+Check-In Controller:
+  - Create:
+      Context: Registers a check-in of a user in a gym
+      Method: POST
+      URL: /gyms/:gymId/check-ins
+      JSON Payload: {
+        "latitude": number
+        "longitude": number
+      }
+  
+  - Validate:
+      Context: Validates a check-in
+      Method: PATCH
+      URL: /check-ins/:checkInId/validate
+      JSON Payload: NONE
+
+  - Metrics:
+      Context: Get check-ins metrics
+      Method: GET
+      URL: /check-ins/metrics
+      JSON Payload: NONE
+
+  - History:
+      Context: Get check-ins history
+      Method: GET
+      URL: /check-ins/history
+      JSON Payload: NONE
+
+How to run the project:
+  - You must have a docker container with a PostGreSQL database running linked with the project
+  - npm i to install dependencies
+  - npm run start:dev
+  - For tests:
+      npm run test:
+      npm run test:watch 
+      npm run pretest:e2e
+      npm run test:e2e
+      npm run test:e2e:watch
+      npm run test:coverage
+      npm run test:ui
+
+  - Check Prisma DOCS for a up to date guide on migrations
 
 ## RFs (Requisitos funcionais)
 
