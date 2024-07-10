@@ -93,7 +93,22 @@ Check-In Controller:
       Method: GET
       URL: /check-ins/history
       JSON Payload: NONE
-      
+
+How to run the project:
+  - You must have a docker container with a PostGreSQL database running linked with the project
+  - npm i to install dependencies
+  - npm run start:dev
+  - For tests:
+      npm run test:
+      npm run test:watch 
+      npm run pretest:e2e
+      npm run test:e2e
+      npm run test:e2e:watch
+      npm run test:coverage
+      npm run test:ui
+
+  - Check Prisma DOCS for a up to date guide on migrations
+
 ## RFs (Requisitos funcionais)
 
 - [x] Deve ser possível se cadastrar;
